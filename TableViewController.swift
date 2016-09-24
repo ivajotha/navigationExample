@@ -9,15 +9,29 @@
 import UIKit
 
 class TableViewController: UITableViewController {
+    //? ESTE OBJETO ES OPCIONAL
+    //! ES SEGURO QUE EXISTE
+    var elArreglo:NSArray?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        //INICILIZAR EL ARREGLO
+        self.elArreglo = [ ["Juan", "Pedro", "Victor", "Juan"], ["Silvia", "Maribel", "Gabriela", "Beatriz", "Rocio", "Mariel", "Cruz", "Alejandra"] ];
+        
+        
+        //self.navigationController!.title = "AMIGOS"
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationItem.title = "AMIGOS"
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,23 +43,41 @@ class TableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        //NUMERO DE SECCIONES DE LA TABLA
+        return self.elArreglo!.count //1;
+        
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        return self.elArreglo![section].count //self.elArreglo!.count
     }
 
-    /*
+    
+    
+    //DECOMENTAR ESTA FUNCION
+    //PARA SABER QUE SELDA VA A REUTILIZAR SE DECLARA Y SE INSTANCIA EN EL TABLE VIEW CELLL (LA LINEA DE LA CELDA)
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("CeldaReutilizable", forIndexPath: indexPath)
+        
         // Configure the cell...
-
+        //cell.textLabel!.text = (self.elArreglo![indexPath.row] as! String)
+        cell.textLabel!.text = (self.elArreglo![indexPath.section][indexPath.row] as! String)
         return cell
     }
-    */
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 30.0
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0{
+            return "LORD`s"
+        }
+        
+        return "LADY`s"
+    }
 
     /*
     // Override to support conditional editing of the table view.
